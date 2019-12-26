@@ -36,9 +36,53 @@
 
 ​		⑥Temporal 对时间类型映射, Temporal.[DATE|TIME|TIMESTAMP],可以贴@Column上
 
-​	ⅡⅢ
+​		⑦JoinColumn 修改列信息  
+
+(3)常用关联关系映射
+
+​	①单向多对一:添加一个外键来维护双方关系，ManyToOne注解
+
+​		推荐先保存one方再保存many方(可以设置关联关系),先保存many方需发送维护外键关系的额外sql		
+
+```java
+@Getter@Setter@Entity@Table(name="")
+public class User{
+    @id@GenaretedValue(strategy=GenerationType.AUTO)
+    private Long id;
+    @ManyToOne
+    private LoginInfo info;
+} 
+```
+
+​	②单向一对多:OneToMany(one以集合的形式指向many方)注解  
+
+​		使用fetch属性指定加载的方式,可以使用FetchType.EAGE设置为积极加载。
 
 (4)EntityManagerFactory对象创建和EntityManager对象获取方法创建
 
+```java
+public class JPAUtil {
+    private static EntityManagerFactory emf;
+    private JPAUtil() {}
+    static {
+        //加载persistence.xml文件中的persistence-util中的配置信息创建EntityManagerFactory对象
+        emf = Persistence.createEntityManagerFactory("myPersistence");
+    }
+    //使用EntityManager创建EntityManager对象
+    public static EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }//EntityManager线程不安全用完后需要关闭
+}
+```
 
+(6)EntityManager常用方法
 
+①根据主键查询指定类型的数据
+
+​	<T> T find(Class<T> type, Object oid);//带一级缓存
+
+​	<T> T getReference(Class<T> type, Object oid);
+
+ ②其他方法
+
+​	持久化:persist(obj)           删除:remove(obj)          更新:merge(obj)  

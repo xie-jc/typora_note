@@ -20,7 +20,7 @@
 
 #### 4.web项目
 
-(1) 创建:ava Enterprise->选择服务器->勾选web类型
+(1) 创建:java Enterprise->选择服务器->勾选web类型
 
 (2) 运行:选择tomcat运行
 
@@ -33,3 +33,12 @@ alt+o重写方法(带钥匙图标的)          引用路径(相对webapp路径):
 (1)配置maven
 
 settings->build...->build tools ->maven
+
+(2)框架配置文件模板
+
+先决操作:右击项目名称，选择“Add framework support” 引入相关项目模板
+
+​	①spring配置文件
+
+​	Ⅰ、右键->new->xml config file    Ⅱ、引入xml相关约束,如在文件输入“<mvc:”,弹出相关提示
+
