@@ -1,8 +1,4 @@
-## 1.额外知识
-
-①maven中依赖中optional标签为true这表示该依赖继承时不能传递
-
-## 2.参数设置
+#### 1.参数设置
 
 (1) 场景:账号密码加密放在配置文件不安全，程序启动时传入参数
 
@@ -10,23 +6,31 @@
 
 (2)配置文件参数注入(该注解支持松绑定)
 
-①自己写的类:@ConfigurationProperties("配置文件前缀")贴组件类上   ②第三方jar中的类:贴方法上   ③若不在配置文件中设置参数,打包后传参数(...xx.jar --db.username=root)    
+①自己写的类:@ConfigurationProperties("配置文件前缀")贴组件类上   ②第三方jar中的类:贴方法上   ③若不在配置文件中设置参数,打包后传参数(...xx.jar --db.username=root)   
 
-## 3.热部署
+#### 3.热部署
 
 (1)jrebel(7.0以上)
 
 ①收费:翻墙去用Facebook免费注册账号  ②待详细了解
 
-(2)spring-boot-devtools 
+(2)spring-boot-devtools (idea中需要buil项目才能热部署)
 
-①原理:通过监控classpath的变化,如果classpath中的文件发生变化,即触发重启;SpringBoot通过两个classpath来完成reload,一个basic classloader中加载不变的类,一个restart classloader中加载classpath中的类,**重启的时候,restart classloader中的类丢弃并重新加载**    ② Ⅰ 排除资源：spring.devtools.restart.exclude=static/**,templates/**  Ⅱ spring.devtools.restart.additional-exclude=public/** (处理默认配置排除之外的) Ⅲ spring.devtools.restart.enabled=false(禁用自动重启)
+原理:通过监控classpath的变化,如果classpath中的文件发生变化,即触发重启;SpringBoot通过两个classpath来完成reload,一个basic classloader中加载不变的类,一个restart classloader中加载classpath中的类,重启的时候,restart classloader中的类丢弃并重新加载
 
-(3）可以使用triggerfile的重启策略:(trigger.file内容改变才会触发重启)
+```properties
+#重启排除项(idea中需要buil项目才能热部署,包括静态资源)
+spring.devtools.restart.exclude=static/**,templates/**
+#从重启排除项排除
+spring.devtools.restart.additional-exclude=public/**
+#禁用自动重启
+spring.devtools.restart.enabled=false 
+#可以使用triggerfile的重启策略:(trigger.file内容改变才会触发重启)
+#注意这个文件不要放到default_excludes目录下面
+spring.devtools.restart.triggerFile=trigger.file
+```
 
-①spring.devtools.restart.triggerFile=trigger.file   ②注意这个文件不要放到default_excludes目录下面
-
-## 4.mybatis集成即事务
+#### 4.mybatis集成即事务
 
 (1)mybatis集成
 
