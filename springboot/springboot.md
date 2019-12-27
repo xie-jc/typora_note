@@ -30,7 +30,7 @@ spring.devtools.restart.enabled=false
 spring.devtools.restart.triggerFile=trigger.file
 ```
 
-#### 4.mybatis集成即事务
+#### 4.mybatis、事务、freemark集成即统一错误处理
 
 (1)mybatis集成
 
@@ -38,7 +38,34 @@ spring.devtools.restart.triggerFile=trigger.file
 
 (2)事务控制
 
-①注解方式:开启事务的类贴注解+只读方法贴注解(标识为只读)   ②xml方式:Ⅰ Javaconfig类和config.xml关联 Ⅱ 在配置类声明事务管理器txMnager,用于注入dataSource和绑定id名
+​	①注解方式:开启事务的类贴注解+只读方法贴注解(标识为只读)   
 
+​	②xml方式:ⅠJavaconfig类和config.xml关联   Ⅱ在配置类声明事务管理器txMnager,用于注入dataSource和绑定id名
 
+(3)freemark集成
+
+​	①常见模板引擎技术:jsp、freemarker、 Velocity 、thymeleaf(减少前后端开发冲突,但是较为影响性能)
+
+​	②集成:引入spring-start-freemarker,配置ftl页面session可用和缓存不可用。动态模板默认存储文件夹:templates
+
+```properties
+#设置session在页面可显示，默认为false(request同理)
+spring.freemarker.expose-session-attributes=true
+#允许session同名属性覆盖model中属性值,默认false(request同理)
+spring.freemarker.allow-session-override=true
+#是否开启缓,存默认为true,开发时建议为false
+spring.freemarker.cache=false
+```
+
+(4)错误统一处理
+
+​	①springboot默认情况下将所有的错误都定位到/error这个处理路径下		
+
+|           静态错误页面默认结构            |             模板错误页面默认结构             |
+| :---------------------------------------: | :------------------------------------------: |
+| ![1577411103117](images/error_static.png) | ![1577411247492](images/error_templates.png) |
+
+```
+
+```
 

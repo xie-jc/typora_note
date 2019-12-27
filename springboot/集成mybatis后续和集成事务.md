@@ -1,18 +1,18 @@
-## 自动装配原理
+#### 1.自动装配原理
 
 AnnotationConfigApplicationContext(or WebApplicationContext)会创建@EnableAutoConfig-->SpringFactoryLoader-->读取整个项目中META-INF/spring.factories中的XXXAutoConfiguration-->创建对应的bean放在容器中
 
-## 静态资源处理
+#### 2.静态资源处理
 
 ①默认静态资源目录(resources下的):public、static、resources或者META-INF/resources   ②让自己的目录成为静态资源目录spring.resources.static-location
 
-## java模板引擎技术（动态资源处理、放在templates目录中）
+#### 3.java模板引擎技术（动态资源处理、放在templates目录中）
 
-jsp(spring-boot支持性较差)、Thymeleaf(spring-boot推荐、但性能差别较大,慎用;优势分离前后端人员操作代码位置)、velocity、freemarker
+①jsp(spring-boot支持性较差)、Thymeleaf(spring-boot推荐、但性能差别较大,慎用;优势分离前后端人员操作代码位置)、velocity、freemarker
 
-freemarker之前配置xml需要两个配置,整合后会自动装配,文件后缀“.ftl”。
+②freemarker之前配置xml(做两项配置),整合后会自动装配,文件后缀“.ftl”。
 
-注意:freemarker中默认是无法拿到session中数据,需要自己配置expose-session-attributes为true:其他的request中的也拿不到,但是一般用model传数据了
+③注意:freemarker中默认是无法拿到session中数据,需要自己配置expose-session-attributes为true:其他的request中的也拿不到,但是一般用model传数据了
 
 统一异常处理:
 
